@@ -1,0 +1,25 @@
+# kubectl get configmap aws-auth -n kube-system -o yaml
+# Need to change this with my configuration in k8s
+apiVersion: v1
+data:
+  mapRoles: |
+    - rolearn: arn:aws:iam::160885265516:role/eksctl-roboshop-nodegroup-spot-NodeInstanceRole-t3NsVQtbw1iI
+      groups:
+      - system:bootstrappers
+      - system:nodes
+      username: system:node:{{EC2PrivateDNSName}}
+  mapUsers: |
+    - groups:
+      - roboshop-trainee
+      userarn: arn:aws:iam::160885265516:user/suresh
+      username: suresh
+    - groups:
+      - roboshop-admin
+      userarn: arn:aws:iam::160885265516:user/ramesh
+      username: ramesh
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2026-04-15T02:15:39Z"
+  name: aws-auth
+  namespace: kube-system
+  uid: 8af307e2-efaf-413c-98f5-c2726eb750dc
