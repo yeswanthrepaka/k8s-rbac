@@ -1,0 +1,28 @@
+# namespace level
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+
+metadata:
+  name: roboshop-admin
+  namespace: roboshop
+
+rules:
+  - apiGroups: ["*"]
+    resources: ["*"]
+    verbs: ["*"]
+
+---
+# cluster level
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+
+metadata:
+  name: cluster-reader
+
+rules:
+  - apiGroups: [""]
+    resources: ["persistentvolumes"]
+    verbs: ["get", "watch", "list"]
+  - apiGroups: ["storage.k8s.io"]
+    resources: ["storageclasses"]
+    verbs: ["get", "watch", "list"]
